@@ -3,47 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Suivi des heures</title>
+<title>FGP — Suivi des heures</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: #0f1117;
-    color: #e8e6e0;
+    background: #f2f2f0;
+    color: #1a1a1a;
     min-height: 100vh;
-    padding: 24px;
   }
 
-  .header {
+  /* HEADER */
+  .topbar {
+    background: #1a1a1a;
+    padding: 14px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
   }
 
-  .title {
-    font-family: 'Syne', sans-serif;
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-badge {
+    background: #B01C1C;
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
     font-size: 18px;
     font-weight: 700;
-    color: #f0ece4;
-    letter-spacing: -0.3px;
+    padding: 4px 10px;
+    letter-spacing: 1px;
   }
 
-  .item-name {
-    font-size: 12px;
-    color: #7a7870;
-    margin-top: 2px;
+  .page-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
 
   .refresh-btn {
-    background: #1e2028;
-    border: 1px solid #2a2d38;
-    color: #7a7870;
-    padding: 6px 12px;
-    border-radius: 6px;
+    background: transparent;
+    border: 1px solid #3a3a3a;
+    color: #aaa;
+    padding: 6px 14px;
+    border-radius: 4px;
     font-size: 12px;
     cursor: pointer;
     font-family: 'DM Sans', sans-serif;
@@ -51,17 +63,221 @@
   }
 
   .refresh-btn:hover {
-    background: #252830;
-    color: #c9a96e;
-    border-color: #c9a96e44;
+    border-color: #B01C1C;
+    color: #B01C1C;
   }
 
+  /* MAIN */
+  .main {
+    padding: 24px 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* FILTRE */
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .filter-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+  }
+
+  .filter-select {
+    flex: 1;
+    max-width: 340px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: #1a1a1a;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .filter-select:focus {
+    border-color: #B01C1C;
+  }
+
+  /* STATS CARDS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    border-left: 3px solid #B01C1C;
+  }
+
+  .stat-card.total {
+    background: #B01C1C;
+    border-left: none;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+
+  .stat-card.total .stat-label {
+    color: #ffffff99;
+  }
+
+  .stat-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1;
+  }
+
+  .stat-card.total .stat-value {
+    color: #ffffff;
+  }
+
+  .stat-unit {
+    font-size: 13px;
+    color: #999;
+    margin-left: 3px;
+  }
+
+  .stat-card.total .stat-unit {
+    color: #ffffff99;
+  }
+
+  /* TABLE */
+  .table-card {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .table-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 3fr 80px 60px;
+    padding: 10px 20px;
+    background: #1a1a1a;
+    gap: 12px;
+  }
+
+  .th {
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 3fr 80px 60px;
+    padding: 14px 20px;
+    gap: 12px;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
+    transition: background 0.15s;
+    animation: rowIn 0.25s ease forwards;
+    opacity: 0;
+  }
+
+  .table-row:last-child { border-bottom: none; }
+  .table-row:hover { background: #fafafa; }
+
+  @keyframes rowIn {
+    from { opacity: 0; transform: translateX(-6px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .row-type {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+
+  .type-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .row-projets {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .bar-wrap {
+    height: 6px;
+    background: #f0f0f0;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+
+  .row-heures {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: right;
+  }
+
+  .row-pct {
+    font-size: 12px;
+    color: #aaa;
+    text-align: right;
+  }
+
+  /* PROJET MODE — liste projets */
+  .projet-section {
+    margin-top: 24px;
+  }
+
+  .projet-section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  /* LOADING / ERROR */
   .loading {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 200px;
-    color: #7a7870;
+    color: #aaa;
     font-size: 14px;
     gap: 10px;
   }
@@ -69,183 +285,65 @@
   .spinner {
     width: 18px;
     height: 18px;
-    border: 2px solid #2a2d38;
-    border-top-color: #c9a96e;
+    border: 2px solid #eee;
+    border-top-color: #B01C1C;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .error {
-    background: #1a1218;
-    border: 1px solid #3d1f1f;
-    border-radius: 10px;
+  .error-box {
+    background: #fff5f5;
+    border: 1px solid #ffc0c0;
+    border-radius: 8px;
     padding: 16px;
-    color: #e07070;
+    color: #B01C1C;
     font-size: 13px;
     line-height: 1.6;
-  }
-
-  .total-card {
-    background: linear-gradient(135deg, #c9a96e22, #c9a96e11);
-    border: 1px solid #c9a96e44;
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .total-label {
-    font-size: 12px;
-    color: #c9a96e;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 500;
-  }
-
-  .total-hours {
-    font-family: 'Syne', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: #c9a96e;
-  }
-
-  .total-unit {
-    font-size: 14px;
-    color: #c9a96e99;
-    margin-left: 4px;
-  }
-
-  .types-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .type-row {
-    background: #1a1c24;
-    border: 1px solid #2a2d38;
-    border-radius: 10px;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: border-color 0.2s;
-    animation: fadeIn 0.3s ease forwards;
-    opacity: 0;
-  }
-
-  .type-row:hover {
-    border-color: #3a3d4a;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .type-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .type-name {
-    flex: 1;
-    font-size: 14px;
-    color: #c8c6c0;
-    font-weight: 400;
-  }
-
-  .type-bar-wrap {
-    flex: 2;
-    height: 4px;
-    background: #2a2d38;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .type-bar {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.6s ease;
-  }
-
-  .type-hours {
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: #f0ece4;
-    min-width: 52px;
-    text-align: right;
-  }
-
-  .type-pct {
-    font-size: 11px;
-    color: #5a5850;
-    min-width: 36px;
-    text-align: right;
   }
 
   .empty {
     text-align: center;
-    padding: 40px;
-    color: #5a5850;
-    font-size: 13px;
-  }
-
-  .config-banner {
-    background: #1a1c24;
-    border: 1px dashed #2a2d38;
-    border-radius: 10px;
-    padding: 14px 18px;
-    font-size: 12px;
-    color: #5a5850;
-    margin-top: 16px;
-    line-height: 1.6;
-  }
-
-  .config-banner code {
-    background: #252830;
-    padding: 2px 6px;
-    border-radius: 4px;
-    color: #c9a96e;
-    font-size: 11px;
+    padding: 48px;
+    color: #bbb;
+    font-size: 14px;
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div>
-    <div class="title">Suivi des heures</div>
-    <div class="item-name" id="item-name">—</div>
+<div class="topbar">
+  <div class="logo-area">
+    <div class="logo-badge">FGP</div>
+    <div class="page-title">Suivi des heures — Projets</div>
   </div>
-  <button class="refresh-btn" onclick="init()">↻ Actualiser</button>
+  <button class="refresh-btn" onclick="loadData()">↻ Actualiser</button>
 </div>
 
-<div id="content">
-  <div class="loading"><div class="spinner"></div> Chargement...</div>
+<div class="main">
+  <div class="filter-bar">
+    <span class="filter-label">Projet</span>
+    <select class="filter-select" id="projet-select" onchange="renderView()">
+      <option value="tous">Tous les projets</option>
+    </select>
+  </div>
+
+  <div id="stats-row" class="stats-row"></div>
+  <div id="content"></div>
 </div>
 
 <script>
-const API_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjYzNzAwMDQwNiwiYWFpIjoxMSwidWlkIjoxMDEzMTIwMzQsImlhZCI6IjIwMjYtMDMtMjRUMTI6NDI6MjguMDAwWiIsInBlciI6Im1lOndyaXRlIiwiYWN0aWQiOjI5MzMxNzM4LCJyZ24iOiJ1c2UxIn0.4cNtSG8_pLtMm6Hpgy-nw0ovElFSVwTInrOjQ-8HcI8';
-const BOARD_ID = '18218820114';
-const COL_TYPE  = 'lookup_mm1zhkqf';
+const API_TOKEN  = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjYzNzAwMDQwNiwiYWFpIjoxMSwidWlkIjoxMDEzMTIwMzQsImlhZCI6IjIwMjYtMDMtMjRUMTI6NDI6MjguMDAwWiIsInBlciI6Im1lOndyaXRlIiwiYWN0aWQiOjI5MzMxNzM4LCJyZ24iOiJ1c2UxIn0.4cNtSG8_pLtMm6Hpgy-nw0ovElFSVwTInrOjQ-8HcI8';
+const BOARD_ID   = '18218820114';
+const COL_TYPE   = 'lookup_mm1zhkqf';
 const COL_HEURES = 'lookup_mm1zr8p6';
 
-const COLORS = ['#4aad85','#c9a96e','#6e8dc9','#c96e8d','#8dc96e','#c96e6e','#6ec9c9','#a96ec9'];
+const COLORS = ['#B01C1C','#1a6cb0','#2a9d5c','#e07c1a','#7c3ab0','#0e8a8a','#b07c1a','#3a3ab0'];
 
-function getItemIdFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('itemId') || params.get('item_id') || null;
-}
+let allItems = [];
 
-async function query(q) {
+async function gqlQuery(q) {
   const res = await fetch('https://api.monday.com/v2', {
     method: 'POST',
     headers: {
@@ -258,113 +356,147 @@ async function query(q) {
   return res.json();
 }
 
-async function init() {
-  document.getElementById('content').innerHTML = '<div class="loading"><div class="spinner"></div> Chargement...</div>';
+async function loadData() {
+  document.getElementById('stats-row').innerHTML = '';
+  document.getElementById('content').innerHTML = '<div class="loading"><div class="spinner"></div> Chargement des données...</div>';
 
   try {
-    // Trouver l'item — soit via URL param, soit on prend les premiers items du board
-    const itemId = getItemIdFromUrl();
+    const data = await gqlQuery(`{
+      boards(ids:[${BOARD_ID}]) {
+        items_page(limit:200) {
+          items {
+            id
+            name
+            column_values(ids:["${COL_TYPE}","${COL_HEURES}"]) {
+              id
+              display_value
+            }
+          }
+        }
+      }
+    }`);
 
-    let gql;
-    if (itemId) {
-      gql = `{ items(ids:[${itemId}]) { id name column_values(ids:["${COL_TYPE}","${COL_HEURES}"]) { id value display_value } } }`;
-    } else {
-      // Mode démo — prend le premier item du board
-      gql = `{ boards(ids:[${BOARD_ID}]) { items_page(limit:1) { items { id name column_values(ids:["${COL_TYPE}","${COL_HEURES}"]) { id value display_value } } } } }`;
-    }
+    const items = data.data?.boards?.[0]?.items_page?.items || [];
 
-    const data = await query(gql);
+    // Parser chaque item
+    allItems = items.map(item => {
+      const colType   = item.column_values.find(c => c.id === COL_TYPE);
+      const colHeures = item.column_values.find(c => c.id === COL_HEURES);
 
-    let item;
-    if (itemId) {
-      item = data.data?.items?.[0];
-    } else {
-      item = data.data?.boards?.[0]?.items_page?.items?.[0];
-    }
+      const types  = (colType?.display_value || '').split(/[,\n]/).map(s => s.trim()).filter(Boolean);
+      const heures = (colHeures?.display_value || '').split(/[,\n]/).map(s => parseFloat(s) || 0);
 
-    if (!item) {
-      showError('Aucun item trouvé. Assure-toi que le board ID est correct et que tu as les permissions.');
-      return;
-    }
-
-    document.getElementById('item-name').textContent = item.name;
-
-    const cols = item.column_values;
-    const colType   = cols.find(c => c.id === COL_TYPE);
-    const colHeures = cols.find(c => c.id === COL_HEURES);
-
-    let types = [];
-    let heures = [];
-
-    // Parser les valeurs miroir
-    try {
-      const tv = colType?.display_value || colType?.value || '';
-      const hv = colHeures?.display_value || colHeures?.value || '';
-
-      // Les colonnes lookup retournent des valeurs séparées par virgule ou newline
-      types  = tv.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
-      heures = hv.split(/[,\n]/).map(s => parseFloat(s.trim()) || 0).filter((_, i) => i < types.length);
-    } catch(e) {
-      console.error('Parse error:', e);
-    }
-
-    if (types.length === 0) {
-      document.getElementById('content').innerHTML = '<div class="empty">Aucune donnée disponible pour cet item.</div><div class="config-banner">Colonnes attendues : <code>' + COL_TYPE + '</code> (type de temps) et <code>' + COL_HEURES + '</code> (heures). Vérifie que les colonnes miroir sont bien configurées.</div>';
-      return;
-    }
-
-    // Agréger par type
-    const totaux = {};
-    types.forEach((type, i) => {
-      const t = type || 'Non défini';
-      const h = heures[i] || 0;
-      totaux[t] = (totaux[t] || 0) + h;
-    });
-
-    const total = Object.values(totaux).reduce((a, b) => a + b, 0);
-
-    // Rendu
-    let html = `
-      <div class="total-card">
-        <div>
-          <div class="total-label">Total heures</div>
-        </div>
-        <div><span class="total-hours">${total.toFixed(1)}</span><span class="total-unit">h</span></div>
-      </div>
-      <div class="types-grid">
-    `;
-
-    Object.entries(totaux)
-      .sort((a, b) => b[1] - a[1])
-      .forEach(([type, h], i) => {
-        const pct = total > 0 ? (h / total * 100) : 0;
-        const color = COLORS[i % COLORS.length];
-        html += `
-          <div class="type-row" style="animation-delay:${i * 0.06}s">
-            <div class="type-dot" style="background:${color}"></div>
-            <div class="type-name">${type}</div>
-            <div class="type-bar-wrap">
-              <div class="type-bar" style="width:${pct}%;background:${color}"></div>
-            </div>
-            <div class="type-hours">${h.toFixed(1)}h</div>
-            <div class="type-pct">${pct.toFixed(0)}%</div>
-          </div>
-        `;
+      // Agréger par type pour cet item
+      const totaux = {};
+      types.forEach((t, i) => {
+        const type = t || 'Non défini';
+        totaux[type] = (totaux[type] || 0) + (heures[i] || 0);
       });
 
-    html += '</div>';
-    document.getElementById('content').innerHTML = html;
+      return { id: item.id, name: item.name, totaux };
+    }).filter(item => Object.keys(item.totaux).length > 0);
+
+    // Peupler le dropdown
+    const select = document.getElementById('projet-select');
+    select.innerHTML = '<option value="tous">Tous les projets</option>';
+    allItems.forEach(item => {
+      const opt = document.createElement('option');
+      opt.value = item.id;
+      opt.textContent = item.name;
+      select.appendChild(opt);
+    });
+
+    renderView();
 
   } catch(err) {
-    showError('Erreur API : ' + err.message);
+    document.getElementById('content').innerHTML = `<div class="error-box">⚠️ Erreur API : ${err.message}</div>`;
   }
 }
 
-function showError(msg) {
-  document.getElementById('content').innerHTML = `<div class="error">⚠️ ${msg}</div>`;
+function aggregateItems(items) {
+  const totaux = {};
+  items.forEach(item => {
+    Object.entries(item.totaux).forEach(([type, h]) => {
+      totaux[type] = (totaux[type] || 0) + h;
+    });
+  });
+  return totaux;
 }
 
-init();
+function renderView() {
+  const selectedId = document.getElementById('projet-select').value;
+  const isTous = selectedId === 'tous';
+
+  const items = isTous ? allItems : allItems.filter(i => i.id === selectedId);
+  const totaux = aggregateItems(items);
+  const total  = Object.values(totaux).reduce((a, b) => a + b, 0);
+
+  // Stats cards
+  const nbProjets = items.length;
+  const nbTypes   = Object.keys(totaux).length;
+
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card total">
+      <div class="stat-label">Total heures</div>
+      <div class="stat-value">${total.toFixed(1)}<span class="stat-unit">h</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">${isTous ? 'Projets' : 'Projet'}</div>
+      <div class="stat-value">${nbProjets}<span class="stat-unit">${isTous ? 'projets' : ''}</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Types de temps</div>
+      <div class="stat-value">${nbTypes}</div>
+    </div>
+  `;
+
+  if (total === 0) {
+    document.getElementById('content').innerHTML = '<div class="empty">Aucune heure enregistrée pour cette sélection.</div>';
+    return;
+  }
+
+  // Table
+  const sorted = Object.entries(totaux).sort((a, b) => b[1] - a[1]);
+
+  let html = `
+    <div class="table-card">
+      <div class="table-header">
+        <div class="th">Type de temps</div>
+        <div class="th">${isTous ? 'Projets' : ''}</div>
+        <div class="th">Répartition</div>
+        <div class="th" style="text-align:right">Heures</div>
+        <div class="th" style="text-align:right">%</div>
+      </div>
+  `;
+
+  sorted.forEach(([type, h], i) => {
+    const pct = total > 0 ? (h / total * 100) : 0;
+    const color = COLORS[i % COLORS.length];
+
+    // Compter combien de projets ont ce type
+    const nbProjetsType = items.filter(item => item.totaux[type]).length;
+
+    html += `
+      <div class="table-row" style="animation-delay:${i * 0.05}s">
+        <div class="row-type">
+          <div class="type-dot" style="background:${color}"></div>
+          ${type}
+        </div>
+        <div class="row-projets">${isTous ? nbProjetsType + ' projet' + (nbProjetsType > 1 ? 's' : '') : ''}</div>
+        <div class="bar-wrap">
+          <div class="bar-fill" style="width:${pct}%;background:${color}"></div>
+        </div>
+        <div class="row-heures">${h.toFixed(1)}h</div>
+        <div class="row-pct">${pct.toFixed(0)}%</div>
+      </div>
+    `;
+  });
+
+  html += '</div>';
+  document.getElementById('content').innerHTML = html;
+}
+
+loadData();
 </script>
 </body>
 </html>
